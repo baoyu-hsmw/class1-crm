@@ -18,14 +18,17 @@ use Think\Page;
 class CustomerController extends HomeBaseController {
     function index(){
         //这里显示的是当前登录用户的客户列表
-        $page = intval(I('get.p'));
-        $page_size = 2;
-        $model = M('custormer');
-        $result = $model->where(['user_id'=> $this->getUserID()])->order('`id` DESC')->page("{$page},{$page_size}")->select();
-
-        $count = $model->where(['user_id'=> $this->getUserID()])->count();
-        $page_obj = new Page($count, $page_size);
-        $show = $page_obj->show();
+//        $page = intval(I('get.p'));
+//        $page_size = 2;
+//        $model = M('custormer');
+//        $result = $model->where(['user_id'=> $this->getUserID()])->order('`id` DESC')->page("{$page},{$page_size}")->select();
+//
+//        $count = $model->where(['user_id'=> $this->getUserID()])->count();
+//        $page_obj = new Page($count, $page_size);
+//        $show = $page_obj->show();
+        $p = Util::page('custormer',['user_id'=> $this->getUserID()],'`id` DESC');
+        $result = $p[0];
+        $show=$p[1];
         $this->assign('result', $result);
         $this->assign('show', $show);
         $this->display();

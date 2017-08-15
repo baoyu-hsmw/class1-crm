@@ -6,6 +6,7 @@
  */
 
 namespace Common\Common;
+use Think\Page;
 
 
 /**
@@ -61,5 +62,21 @@ class Util {
                 'index', 'add'
             ]
         ];
+    }
+    static function page($table_name, $where, $order=null){
+        $page = I('get.p', 0, 'intval');
+        $page_size = 25;
+        $model = M($table_name);
+        if(!$order) {
+            $result = $model->where($where)->page("{$page},{$page_size}")->select();
+        } else {
+            $result = $model->where($where)->page("{$page},{$page_size}")->order($order)->select();
+        }
+
+        $count= $model->where($where)->count();
+        $page_obj = new Page($count, $page_size);
+        $show = $page_obj->show();
+
+        return [$result, $show];
     }
 }
