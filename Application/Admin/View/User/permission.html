@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>分配权限</title>
+</head>
+<body>
+<h1>分配权限</h1>
+<form action="__SELF__" method="post">
+    <ul style="list-style: none;">
+        <foreach name="actions" item="ctrl" key="ctrl_name">
+            <volist name="ctrl" id="action">
+                <li>
+                    <php>
+                        $checked = in_array("$ctrl_name/$action", $permissiones);
+                    </php>
+                    <if condition="$checked">
+                    <input type="checkbox" name="permission[]" id="permission_{$ctrl_name}_{$action}" value="{$ctrl_name}/{$action}" checked="checked" /> <label for="permission_{$ctrl_name}_{$action}">{$ctrl_name}/{$action}</label>
+                        <else/>
+                        <input type="checkbox" name="permission[]" id="permission_{$ctrl_name}_{$action}" value="{$ctrl_name}/{$action}" /> <label for="permission_{$ctrl_name}_{$action}">{$ctrl_name}/{$action}</label>
+                    </if>
+                </li>
+            </volist>
+        </foreach>
+    </ul>
+    <div>
+        <input type="submit" value="确定" name="submit" />
+    </div>
+</form>
+</body>
+</html>
