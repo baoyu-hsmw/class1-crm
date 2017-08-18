@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>添加拜访记录</h1>
-<form action="/index.php?c=visit&amp;a=add" method="post">
+<form action="/index.php?m=Home&amp;c=visit&amp;a=add" method="post">
     <div>
         <label for="intention">意向</label>
         <select name="intention" id="intention">
